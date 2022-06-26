@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/692189991f.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Hotel De CSU</title>
+    <!-- Main StyleSheet -->
+    <link rel="stylesheet" href="{% static 'hotel/css/room_list_view.css' %}" />
+    <nav class="navbar">
+      <!-- LOGO -->
+      <div class="logo">Hotel De CSU</div>
+      <div class="nav-links" id="navLinks">
+        <i class="fas fa-times" onclick="hideMenu()"></i>
+        <ul>
+          <div class="menu">
+            <li class="abc">
+              <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="abc">
+              <a href="{% url 'hotel:RoomListView' %}">Room List</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="abc">
+              <a href="{% url 'hotel:ReservationList' %}">Reservation List</a>
+            </li>
+            <li class="abcd">Welcome {{user}}</li>
+            <li class="ab">
+              <a href="{% url 'logout' %}"
+                ><button class="btn btn">Logout</button></a
+              >
+            </li>
+            {% else %}
+            <li class="abc">
+              <a href="{% url 'register_user' %}">Register</a>
+            </li>
+            <li class="ab">
+              <a href="{% url 'login' %}"
+                ><button class="btn btn">Login</button></a
+              >
+            </li>
+            {% endif %}
+          </div>
+        </ul>
+      </div>
+      <i class="fas fa-bars" onclick="showMenu()"></i>
+    </nav>
+  </head>
+
+  <body>
+    <!-- Brand -->
+    <h1 id="brand"></h1>
+    <!-- Main Content -->
+    <div class="content">
+      {% for room_category, room_url in room_list %}
+      <div class="room">
+        <img
+          src="https://www.marinabaysands.com/content/dam/singapore/marinabaysands/master/main/home/hotel/rooms-suites/rooms-suites-masthead-1000x908.jpg"
+        />
+
+        <h2>{{ room_category }} Suite</h2>
+        <p>HOTEL DE CSU is a Great Place to stay</p>
+        <br />
+        {% if user.is_authenticated %}
+        <a href="{{ room_url }}" class="btn btn-primary">Go Reserve</a>
+        {% else %}
+        <div
+          class="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <p style="color: red">You need to login First</p>
+        </div>
+        <br />
+        <a href="{% url 'hotel:RoomListView' %}" class="btn btn-primary"
+          >Reserve</a
+        >
+        {% endif %}
+      </div>
+      {% endfor %}
+      <!-- <div class="content">
+      {% for room_category, room_url in room_list %}
+      <div class="room">
+        <img
+          src="https://www.marinabaysands.com/content/dam/singapore/marinabaysands/master/main/home/hotel/rooms-suites/rooms-suites-masthead-1000x908.jpg"
+          class="card-img-top"
+        />
+          <h2>{{ room_category }} Suite</h2>
+          <p >
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+      {% if user.is_authenticated %}
+        <a href="{{ room_url }}" class="btn btn-primary">Go Reserve</a>
+      </div>
+      {% else %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        You need to login First
+      </div><br>
+        <a href="{% url 'hotel:RoomListView' %}" class="btn btn-primary">Reserve</a>
+      </div>
+      {% endif %}
+      {% endfor %}-->
+    </div>
+  </body>
+  <script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu() {
+      navLinks.style.right = "0";
+    }
+    function hideMenu() {
+      navLinks.style.right = "-300px";
+    }
+  </script>
+</html>

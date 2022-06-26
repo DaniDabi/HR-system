@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation List</title>
+    <script src="https://kit.fontawesome.com/692189991f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'hotel/css/reservation_list_view.css' %}">
+    <nav class="navbar">
+      <!-- LOGO -->
+      <div class="logo">Hotel De CSU</div>
+        <div class="nav-links" id="navLinks">
+          <i class="fas fa-times" onclick="hideMenu()"></i>
+            <ul>
+            <div class="menu">
+            <li class="abc">
+              <a href="{% url 'home' %}">Home</a>
+            </li>
+              <li class="abc"><a href="{% url 'hotel:RoomListView' %}">Room List</a></li>
+              {% if user.is_authenticated %}
+                <li class="abc">
+                  <a href="{% url 'hotel:ReservationList' %}">Reservation List</a>
+                </li>
+                <li class="abcd">Welcome {{user}}</li>
+                <li class="ab">
+                  <a href="{% url 'logout' %}"><button class="btn btn">Logout</button></a>
+                </li>
+              {% else %}
+                <li class="abc">
+                  <a href="{% url 'register_user' %}">Register</a></li>
+                <li class="ab">
+                  <a href="{% url 'login' %}"><button class="btn btn">Login</button></a>
+                </li>
+              {% endif %}
+            </div>
+          </ul>
+        </div>
+        <i class="fas fa-bars" onclick="showMenu()"></i>
+      </nav>
+</head>
+<body>
+    <div class="content">
+        <div class="bookings">
+            {% for reservation in reservation_list %}
+            <div class="booking">
+                <img src="https://images.unsplash.com/photo-1560067174-c5a3a8f37060?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+                    alt="">
+                <div class="category">
+                    <h2>{{reservation.get_room_category}} Suite</h2>
+                </div>
+                <div class="from">
+                    <h3>From: {{reservation.check_in}}</h3>
+                </div>
+                <div class="to">
+                    <h3>To: {{reservation.check_out}}</h3>
+                </div>
+                <div class="beds">
+                    <h3>Beds: {{reservation.room.beds}}</h3>
+                </div>
+                <div class="capacity">
+                    <h3>Capacity: {{reservation.room.capacity}}</h3>
+                </div>
+                <div class="cancel"><a href="{{reservation.get_cancel_reservation_url}}" class="invisible"><i
+                            class="far fa-2x fa-times-circle"> Cancel
+                            Reservation</i></a></div>
+
+            </div>
+            {% endfor %}
+        </div>
+</body>
+<script>
+    var navLinks = document.getElementById("navLinks");
+		function showMenu(){
+			navLinks.style.right = "0";
+		}
+		function hideMenu(){
+			navLinks.style.right = "-300px";
+		}
+</script>
+</html>
