@@ -3,9 +3,6 @@ from .availability import check_availability
 
 def get_available_rooms(category, check_in, check_out):
     room_list = Room.objects.filter(category=category)
-
-    
-        
     available_rooms = []
 
     for room in room_list:

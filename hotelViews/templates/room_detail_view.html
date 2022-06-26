@@ -13,9 +13,10 @@
     <!-- Main StyleSheet -->
     <link
       rel="stylesheet"
-      href="{% static 'hotel/css/room_detail_view.css' %}"
+      href="{% static 'hotelViews/css/room_detail_view.css' %}"
     />
   </head>
+
   <body>
     <!-- Main Content -->
     <div class="content">
@@ -30,14 +31,14 @@
       <div class="room">
         <!-- Div 1: Back to Home -->
         <div class="home">
-          <a href="{% url 'hotel:RoomListView' %}"
-            ><i class="fas fa-arrow-alt-circle-left">Home</i></a
+          <a href="{% url 'hotelViews:RoomListView' %}"
+            ><i class="fas fa-arrow-alt-circle-left">Back</i></a
           >
         </div>
 
         <!-- Div 2: Room Information -->
         <div class="room-info">
-          <h1>{{reservation.get_room_category}}</h1>
+          <h1>{{room_category}}</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Id optio
             rem saepe culpa architecto tempora numquam debitis reiciendis!
@@ -47,16 +48,24 @@
         </div>
 
         <!-- Div 3: Room Booking Form -->
-        <form id="booking-form" action="" method="POST">
+        <form id="reservvation-form" action="" method="POST">
           {% csrf_token %}
-          <h2>Are you sure you wanna cancel this Reservation? Details:</h2>
-          <h3>
-            {{reservation.room.number}}-{{reservation.get_room_category}}<br />
-            {{reservation}}
-          </h3>
+
           <!-- Input Div -->
           <div class="input-div">
-            <button type="submit">Cancel Reservation</button>
+            <label for="id_check_in">Check In : </label>
+            <input type="datetime-local" id="id_check_in" name="check_in" />
+          </div>
+
+          <!-- Input Div -->
+          <div class="input-div">
+            <label for="id_check_out">Check Out : </label>
+            <input type="datetime-local" id="id_check_out" name="check_out" />
+          </div>
+
+          <!-- Input Div -->
+          <div class="input-div">
+            <button type="submit">Reserve Room</button>
           </div>
         </form>
       </div>

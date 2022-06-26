@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation List</title>
     <script src="https://kit.fontawesome.com/692189991f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'hotel/css/reservation_list_view.css' %}">
+    <link rel="stylesheet" href="{% static 'hotelViews/css/reservation_list_view.css' %}">
     <nav class="navbar">
       <!-- LOGO -->
       <div class="logo">Hotel De CSU</div>
@@ -18,10 +18,10 @@
             <li class="abc">
               <a href="{% url 'home' %}">Home</a>
             </li>
-              <li class="abc"><a href="{% url 'hotel:RoomListView' %}">Room List</a></li>
+              <li class="abc"><a href="{% url 'hotelViews:RoomListView' %}">Room List</a></li>
               {% if user.is_authenticated %}
                 <li class="abc">
-                  <a href="{% url 'hotel:ReservationList' %}">Reservation List</a>
+                  <a href="{% url 'hotelViews:ReservationList' %}">Reservation List</a>
                 </li>
                 <li class="abcd">Welcome {{user}}</li>
                 <li class="ab">
@@ -65,7 +65,6 @@
                 <div class="cancel"><a href="{{reservation.get_cancel_reservation_url}}" class="invisible"><i
                             class="far fa-2x fa-times-circle"> Cancel
                             Reservation</i></a></div>
-
             </div>
             {% endfor %}
         </div>

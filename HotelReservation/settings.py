@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     #my_apps
+    'hotelViews',
     'hotel',
-    'hotel.reservation_fucntions', 
+    'reservation_fucntions', 
     'users',
 ]
 

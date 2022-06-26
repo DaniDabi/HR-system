@@ -26,11 +26,13 @@
               <a href="{% url 'home' %}">Home</a>
             </li>
             <li class="abc">
-              <a href="{% url 'hotel:RoomListView' %}">Room List</a>
+              <a href="{% url 'hotelViews:RoomListView' %}">Room List</a>
             </li>
             {% if user.is_authenticated %}
             <li class="abc">
-              <a href="{% url 'hotel:ReservationList' %}">Reservation List</a>
+              <a href="{% url 'hotelViews:ReservationList' %}"
+                >Reservation List</a
+              >
             </li>
             <li class="abcd">Welcome {{user}}</li>
             <li class="ab">

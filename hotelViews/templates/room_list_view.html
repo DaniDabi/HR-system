@@ -10,7 +10,10 @@
     ></script>
     <title>Hotel De CSU</title>
     <!-- Main StyleSheet -->
-    <link rel="stylesheet" href="{% static 'hotel/css/room_list_view.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'hotelViews/css/room_list_view.css' %}"
+    />
     <nav class="navbar">
       <!-- LOGO -->
       <div class="logo">Hotel De CSU</div>
@@ -22,13 +25,18 @@
               <a href="{% url 'home' %}">Home</a>
             </li>
             <li class="abc">
-              <a href="{% url 'hotel:RoomListView' %}">Room List</a>
+              <a href="{% url 'hotelViews:RoomListView' %}">Room List</a>
             </li>
             {% if user.is_authenticated %}
             <li class="abc">
-              <a href="{% url 'hotel:ReservationList' %}">Reservation List</a>
+              <a href="{% url 'hotelViews:ReservationList' %}"
+                >Reservation List</a
+              >
             </li>
-            <li class="abcd">Welcome {{user}}</li>
+            <li class="abcd">
+              Welcome
+              <a href="{% url 'users_profile' %}" class="abc"> {{user}}</a>
+            </li>
             <li class="ab">
               <a href="{% url 'logout' %}"
                 ><button class="btn btn">Logout</button></a
@@ -75,35 +83,12 @@
           <p style="color: red">You need to login First</p>
         </div>
         <br />
-        <a href="{% url 'hotel:RoomListView' %}" class="btn btn-primary"
+        <a href="{% url 'hotelViews:RoomListView' %}" class="btn btn-primary"
           >Reserve</a
         >
         {% endif %}
       </div>
       {% endfor %}
-      <!-- <div class="content">
-      {% for room_category, room_url in room_list %}
-      <div class="room">
-        <img
-          src="https://www.marinabaysands.com/content/dam/singapore/marinabaysands/master/main/home/hotel/rooms-suites/rooms-suites-masthead-1000x908.jpg"
-          class="card-img-top"
-        />
-          <h2>{{ room_category }} Suite</h2>
-          <p >
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-      {% if user.is_authenticated %}
-        <a href="{{ room_url }}" class="btn btn-primary">Go Reserve</a>
-      </div>
-      {% else %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        You need to login First
-      </div><br>
-        <a href="{% url 'hotel:RoomListView' %}" class="btn btn-primary">Reserve</a>
-      </div>
-      {% endif %}
-      {% endfor %}-->
     </div>
   </body>
   <script>

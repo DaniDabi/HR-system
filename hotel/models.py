@@ -36,7 +36,7 @@ class Reservation(models.Model):
         return room_category
     
     def get_cancel_reservation_url(self):
-        return reverse_lazy('hotel:CancelReservationView', args=[self.pk, ])
+        return reverse_lazy('hotelViews:CancelReservationView', args=[self.pk, ])
 
 class Person(models.Model):
     name = models.CharField(max_length=100)

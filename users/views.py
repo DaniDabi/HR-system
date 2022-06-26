@@ -1,7 +1,8 @@
+from gc import get_objects
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
 def login_user(request):
@@ -45,4 +46,12 @@ def HomeView(request):
     return render(request, 'authenticate/home.html', {})
 
 
+def UsersProfile(request):
+    if request.user.is_authenticated:
+        form = UserChangeForm(instance=request.user)
+        return render(request, 'authenticate/users_profile.html', {
+        'name':request.user,
+        'form':form,})
+    else:
+        return redirect('login')
 
