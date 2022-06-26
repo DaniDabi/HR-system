@@ -34,7 +34,10 @@
                 >Reservation List</a
               >
             </li>
-            <li class="abcd">Welcome {{user}}</li>
+            <li class="abcd">
+              Welcome
+              <a href="{% url 'users_profile' %}" class="abc"> {{user}}</a>
+            </li>
             <li class="ab">
               <a href="{% url 'logout' %}"
                 ><button class="btn btn">Logout</button></a
