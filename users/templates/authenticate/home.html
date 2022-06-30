@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head img="">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,26 +59,66 @@
       <i class="fas fa-bars" onclick="showMenu()"></i>
     </nav>
   </head>
+
   <body>
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="section">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %} {% endif %} {% if user.is_authenticated %}
+      <section class="section">
+        <div class="text-box">
+				<h1>Hello Dear, {{ user }} 
+          <h3>Welcome To Hotel De CSU</h3><br>
+          <p>- We are delighted that you have selected our hotel. On behalf of the entire team at the Hotel,<br> I extend you a very warm welcome and trust your stay with us <br>will be both enjoyable and comfortable-</p>
+          <a href="{% url 'hotelViews:RoomListView' %}" class="hero-btn">Reserve Now</a>
+			  </div>
+      {% else %}
+      <div class="text-box">
+				<h1>Hello Dear, user 
+          <h3>Welcome To Hotel De CSU</h3>
+          <p>- We are delighted that you have selected our hotel. On behalf of the entire team at the Hotel,<br> I extend you a very warm welcome and trust your stay with us <br>will be both enjoyable and comfortable-</p>
+          <a href="{% url 'hotelViews:RoomListView' %}" class="hero-btn">Reserve Now</a>
+			  </div>
+      {% endif %}
+    </section>
     </div>
-    {% endfor %} {% endif %} {% if user.is_authenticated %}
-    <h1>Hello Dear {{ user }}</h1>
-    {% else %}
-    <h1>Hello Dear User</h1>
-    {% endif %}
   </body>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+    .section-box {
+      width: 98%;
+      padding-left: 1%;
+      padding-top: 1%;
+      padding-bottom: 1%;
+    }
+    .section {
+      min-height: 100vh;
+      width: 100%;
+      background-image: linear-gradient(
+          rgba(9, 4, 30, 0.7),
+          rgba(9, 4, 30, 0.7)
+        ),
+        url("https://media.istockphoto.com/photos/downtown-cleveland-hotel-entrance-and-waiting-taxi-cab-picture-id472899538?k=20&m=472899538&s=612x612&w=0&h=ZuEBl5Pq1_cn9pUsG_jAGQmiT0UgL1jyl7TZY6w-K0g=");
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      border-radius: 3px;
+      color: white;
+    }
     .navbar {
       display: flex;
       align-items: center;
@@ -114,17 +154,42 @@
     .menu .abcd {
       padding: 5px 14px;
     }
-    /* DROPDOWN MENU */
-    .services {
-      position: relative;
+    .text-box {
+      width: 90%;
+      color: #fcf6f5ff;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
     }
-    .dropdown {
-      background-color: rgb(1, 139, 139);
-      padding: 1em 0;
-      position: absolute; /*WITH RESPECT TO PARENT*/
-      display: none;
-      border-radius: 8px;
-      top: 35px;
+    .text-box h1 {
+      font-size: 56px;
+      text-shadow: 1px 0 2px #000000;
+    }
+    .text-box p {
+      margin: 10px 0 40px;
+      font-size: 14px;
+      color: #fcf6f5ff;
+      text-align: center;
+    }
+    .hero-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 12px 34px;
+      font-size: 16px;
+      background: transparent;
+      position: relative;
+      cursor: pointer;
+    }
+    .hero-btn:hover {
+      border: 1px solid rgba(192, 146, 19, 0.8);
+      background: rgba(192, 146, 19, 0.8);
+      transition: 1s;
+      text-decoration: none;
+      color: white;
     }
     .btn {
       padding: 5px 32px;

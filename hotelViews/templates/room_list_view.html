@@ -10,10 +10,7 @@
     ></script>
     <title>Hotel De CSU</title>
     <!-- Main StyleSheet -->
-    <link
-      rel="stylesheet"
-      href="{% static 'hotelViews/css/room_list_view.css' %}"
-    />
+    <link rel="stylesheet" href="{% static 'hotel/css/room_list_view.css' %}" />
     <nav class="navbar">
       <!-- LOGO -->
       <div class="logo">Hotel De CSU</div>
@@ -34,7 +31,7 @@
               >
             </li>
             <li class="abcd">
-              Welcome
+              WELCOME,
               <a href="{% url 'users_profile' %}" class="abc"> {{user}}</a>
             </li>
             <li class="ab">
@@ -74,7 +71,7 @@
         <p>HOTEL DE CSU is a Great Place to stay</p>
         <br />
         {% if user.is_authenticated %}
-        <a href="{{ room_url }}" class="btn btn-primary">Go Reserve</a>
+        <a href="{{ room_url }}" class="btn btn-primary">Reserve</a>
         {% else %}
         <div
           class="alert alert-warning alert-dismissible fade show"

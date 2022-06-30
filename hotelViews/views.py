@@ -1,5 +1,5 @@
 from django.urls import reverse, reverse_lazy
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import redirect, render, HttpResponse
 from django.views.generic import ListView, View, DeleteView
 from hotel.models import Room, Reservation
 from .forms import AvailabilityForm
@@ -13,7 +13,6 @@ def RoomListView(request):
     room_categories = dict(room.ROOM_CATEGORIES)
     room_values = room_categories.values()
     room_list = []
-
     for category in room_categories:
         room_category = room_categories.get(category)
         room_url = reverse('hotelViews:RoomDetailView', kwargs={'category': category})
@@ -66,10 +65,10 @@ class RoomDetailView(View):
                 user=request.user,
                 room=room,
                 check_in=data['check_in'],
-                check_out=data['check_out']
+                check_out=data['check_out'],
          )
             reservation.save()
-            return HttpResponse(reservation)
+            return redirect('hotelViews:ReservationList')
         else:
             return HttpResponse('All of this category of rooms are booked!! Try another one')
 

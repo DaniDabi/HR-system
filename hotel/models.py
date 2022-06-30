@@ -19,7 +19,7 @@ class Room(models.Model):
     capacity = models.IntegerField()
 
     def __str__ (self):
-        return f'{self.number}. Beds = {self.beds} People =  {self.capacity} '
+        return f'{self.number}. Beds = {self.beds} People =  {self.capacity}'
 
 class Reservation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -37,7 +37,3 @@ class Reservation(models.Model):
     
     def get_cancel_reservation_url(self):
         return reverse_lazy('hotelViews:CancelReservationView', args=[self.pk, ])
-
-class Person(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
